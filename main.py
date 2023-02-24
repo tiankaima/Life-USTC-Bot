@@ -19,7 +19,7 @@ for feed_source in source_list:
     feed = feedparser.parse(feed_source)
     for post in feed['entries']:
         tmp = unix_time_millis(datetime.datetime.fromtimestamp(time.mktime(post.updated_parsed)))
-        if tmp + 1_000 * 60 * 60 > now:
+        if tmp - 7 * 1_000 * 60 * 60 > now:
             print("New post!")
             requests.post("https://life-ustc.tiankaima.cn/api/newMessage",
                           params={"token": new_message_token,
